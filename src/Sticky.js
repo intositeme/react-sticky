@@ -7,7 +7,8 @@ export default class Sticky extends Component {
     topOffset: PropTypes.number,
     bottomOffset: PropTypes.number,
     relative: PropTypes.bool,
-    children: PropTypes.func.isRequired
+    children: PropTypes.func.isRequired,
+    className: PropTypes.string,
   };
 
   static defaultProps = {
@@ -15,7 +16,8 @@ export default class Sticky extends Component {
     topOffset: 0,
     bottomOffset: 0,
     disableCompensation: false,
-    disableHardwareAcceleration: false
+    disableHardwareAcceleration: false,
+    className: '',
   };
 
   static contextTypes = {
@@ -128,8 +130,9 @@ export default class Sticky extends Component {
     );
 
     return (
-      <div>
-        <div ref={placeholder => (this.placeholder = placeholder)} />
+      <div className={this.props.className}>
+        {this.disableCompensation && <div ref={placeholder => (this.placeholder = placeholder)} /> }
+        
         {element}
       </div>
     );
